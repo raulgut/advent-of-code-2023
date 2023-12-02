@@ -29,17 +29,21 @@ public class Main {
         int hreds = 0, hgreens = 0, hblues = 0;
         String[] dices = strHandful.split(", ");
 
-        for (int i=0; i < dices.length; i++) {
-            String[] amountColor = dices[i].split(" ");
+        for (String dice : dices) {
+            String[] amountColor = dice.split(" ");
             int amount = Integer.parseInt(amountColor[0]);
             switch (amountColor[1].trim()) {
-                case "red"      : hreds = amount;
-                                  break;
-                case "green"    : hgreens = amount;
-                                  break;
-                case "blue"     : hblues = amount;
-                                  break;
-                default: System.err.println("Color not accepted " + amountColor[1]);
+                case "red":
+                    hreds = amount;
+                    break;
+                case "green":
+                    hgreens = amount;
+                    break;
+                case "blue":
+                    hblues = amount;
+                    break;
+                default:
+                    System.err.println("Color not accepted " + amountColor[1]);
             }
         }
         return new Handful(hreds,hgreens,hblues);
@@ -49,8 +53,8 @@ public class Main {
         if (args.length == 1) {
             try (Stream<String> stream = Files.lines(Paths.get(args[0]))) {
                 int result = stream.map(Main::parseLine)
-                        .map(g -> g.getMins())
-                        .map(h -> h.getPowerSet())
+                        .map(Game::getMins)
+                        .map(Handful::getPowerSet)
                         .reduce(0,Integer::sum);
                 System.out.println(result);
             } catch (IOException e) {

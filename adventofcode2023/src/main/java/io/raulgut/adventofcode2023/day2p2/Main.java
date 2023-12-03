@@ -8,7 +8,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.stream.Stream;
 
-// Advent of code - Day 2 part 1 in Java
+// Advent of code - Day 2 part 2 in Java
 // Argument: test.java.day2-1.txt
 public class Main {
 
